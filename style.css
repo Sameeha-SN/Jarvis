@@ -2,18 +2,6 @@ body {
     background-image: url(images/Iron\ Man\ Jarvis\ Live\ Wallpaper.png);
 }
 
-#el{
-    position: absolute;
-    top:200px;
-    left: 350px;
-    right: 0;
-    margin: auto;
-}
-
-.el{
-    width: 25%;
-}
-
 .video{
     display: none;
 }
