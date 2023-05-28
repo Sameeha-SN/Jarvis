@@ -3,27 +3,6 @@ const startBtn = document.getElementById("start")
 const stopBtn = document.getElementById("stop")
 const speakBtn = document.getElementById("speak")
 
-//QURAN AYAH
-function getAyah() {
-    const ayahNumber= Math. floor(Math. random() * 6236);
-    let url= "http://api.alquran.cloud/v1/ayah/"+ayahNumber+"/en.asad"
-    let xml = new XMLHttpRequest()
-    xml.open("GET", url, true);
-    xml.onload= ()=>{
-        if(xml.status === 200){
-            let json = xml.response;
-            json = JSON.parse(json);
-            const quranAyah = json.data.text;
-            //console.log(quranAyah)
-            readOut(quranAyah)
-            
-        } else{
-            readOut("some error");
-        }
-    }
-    xml.send();
-}
-
 //NEWS
 function getNews() {
     const allCategory = ["national", "business", "sports", "world", "politics", "technology", "startup", "entertainment", "miscellaneous", "hatke", "science", "automobile", "all"];
@@ -66,19 +45,6 @@ function getData() {
     }
     xml.send();
 }
-
-//favourite songs
-function getSong(){
-    var badanPeSitare = "https://www.youtube.com/watch?v=MkABeVCv4lw"
-    var yehRateinYehMausam = "https://www.youtube.com/watch?v=ZG-m3EHwikA"
-    var aajaSanam = "https://www.youtube.com/watch?v=msRBZuoerGo"
-    var ohMereDilKeChain = "https://www.youtube.com/watch?v=9H7DdnclPSI"
-    var ekLadkiBeegi = "https://www.youtube.com/watch?v=kBKA3g8WTuE"
-    const songs= [badanPeSitare, yehRateinYehMausam, aajaSanam, ohMereDilKeChain, ekLadkiBeegi];
-    const randomSong = Math.floor(Math.random() * songs.length);
-    window.open(songs[randomSong]);
-}
-
 
 //GETTING A JOKE
 function getJoke() {
@@ -169,16 +135,8 @@ recognition.onresult = (event) => {
         readOut("Playing it for you!")
         recognition.stop();
     }
-    if(transcript.includes("play one of my favourite song")){
-        recognition.stop();
-        readOut("Here you go dear")
-        getSong();
-    }
     if (transcript.includes("what's the weather today")){
         getData();
-    }
-    if (transcript.includes("read a verse")){
-        getAyah();
     }
     if (transcript.includes("read a news")){
         recognition.stop();
@@ -207,17 +165,12 @@ recognition.onresult = (event) => {
         stopVideo();
         recognition.stop();
     }
-    if(transcript.includes("kitty")){
-        recognition.stop();
-    }
     if(transcript.includes("are you listening")){
         readOut("I am listening dear")
+        recognition.start();
     }
     if(transcript.includes("meet you soon")){
         window.close();
-    }
-    if (hour=="06:50 PM") {
-        readOut("Go to sleep")
     }
 }
 
